@@ -1,6 +1,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication, QDialog, QHBoxLayout, QVBoxLayout
 import sys
+import time
 
 
 class ToolsUi(QDialog):
@@ -220,7 +221,8 @@ class ToolsUi(QDialog):
         tip：PyQt程序的子线程中，直接向主线程的界面传输字符是不符合安全原则的
         :return: None
         """
-        self.textBrowser_recv.insertPlainText(msg)
+        time_str = time.strftime('%H:%M:%S', time.localtime())
+        self.textBrowser_recv.insertPlainText(time_str + ' ' + msg)
         # 滚动条移动到结尾
         self.textBrowser_recv.moveCursor(QtGui.QTextCursor.End)
 
