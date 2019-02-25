@@ -66,7 +66,10 @@ class TcpLogic(tcp_udp_web_ui.ToolsUi):
                     pass
                 else:
                     if recv_msg:
-                        msg = recv_msg.decode('utf-8')
+                        try:
+                            msg = recv_msg.decode('utf-8')
+                        except:
+                            msg = ' '.join(['{:0>2x}'.format(c) for c in recv_msg])
                         msg = '来自IP:{}端口:{}:\n{}\n'.format(address[0], address[1], msg)
                         self.signal_write_msg.emit(msg)
                     else:
@@ -106,7 +109,10 @@ class TcpLogic(tcp_udp_web_ui.ToolsUi):
         while True:
             recv_msg = self.tcp_socket.recv(1024)
             if recv_msg:
-                msg = recv_msg.decode('utf-8')
+                try:
+                    msg = recv_msg.decode('utf-8')
+                except:
+                    msg = ' '.join(['{:0>2x}'.format(c) for c in recv_msg])
                 msg = '来自IP:{}端口:{}:\n{}\n'.format(address[0], address[1], msg)
                 self.signal_write_msg.emit(msg)
             else:
