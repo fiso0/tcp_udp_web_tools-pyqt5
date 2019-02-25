@@ -1,3 +1,6 @@
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+
 from PyQt5 import QtWidgets
 import tcp_logic, udp_logic, web_logic
 import socket
